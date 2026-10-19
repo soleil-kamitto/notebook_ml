@@ -15,17 +15,17 @@ La semana 1 fue qué hace una matriz. Esta semana es **cuándo se puede deshacer
 ## Día por día
 
 ### Lunes — El determinante
-- **Video:** [Cap. 5 · El determinante](https://www.youtube.com/watch?v=Ip3X9LOh2dk)
+- **Video:** [Cap. 6 · El determinante](https://www.youtube.com/watch?v=Ip3X9LOh2dk)
 - **Lectura:** MML 4.1
 - **Debo poder:** explicar el determinante como factor de área o volumen, y qué significa que sea 0 o negativo.
 
 ### Martes — Matrices inversas, rango y espacio nulo
-- **Video:** [Cap. 6 · Matrices inversas, espacio columna y espacio nulo](https://www.youtube.com/watch?v=uQhTuRlWMxw)
+- **Video:** cap. 7 · Matrices inversas, espacio columna y espacio nulo — buscarlo en la [playlist](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) (no pude verificar el enlace directo)
 - **Lectura:** MML 2.8
 - **Debo poder:** decir qué vectores manda una matriz al origen, y por qué eso es el espacio nulo.
 
 ### Miércoles — Matrices no cuadradas
-- **Video:** [Cap. 7 · Matrices no cuadradas como transformaciones entre dimensiones](https://www.youtube.com/watch?v=v8VSDg_WQlA)
+- **Video:** cap. 8 · Matrices no cuadradas como transformaciones entre dimensiones — mismo [playlist](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
 - **Debo poder:** explicar qué hace una matriz de 3×2 y qué una de 2×3.
 
 ### Jueves — Eliminación de Gauss
