@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.DS_Store
+noticias/cache/
+
+# Imagenes propias: nunca a git. Solo viajan el protocolo y el catalogo.
+datos/*
+!datos/README.md
+!datos/catalogo.csv

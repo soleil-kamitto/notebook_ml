@@ -1,0 +1,73 @@
+{
+  "estudiante": "Soleil",
+  "inicio": "2026-10-19",
+  "zona_horaria": "America/Lima",
+  "fase_actual": 1,
+  "semana_actual": 1,
+  "horas_totales": 0,
+  "dias_estudiados": 0,
+  "dias_saltados": [],
+  "ultima_sesion": null,
+  "sin_ia": {
+    "descripcion": "Ejercicios escritos sin autocompletado ni IA. Se registra cada dia.",
+    "dias_limpios": 0,
+    "dias_con_ayuda": 0,
+    "me_rindo_usado": 0
+  },
+  "semanas": {
+    "1": {
+      "tema": "Algebra lineal: del vector a la neurona",
+      "del": "2026-10-19",
+      "al": "2026-10-24",
+      "horas": 0,
+      "estado": "en_curso",
+      "temas": {
+        "vectores": {
+          "dia": "2026-10-19",
+          "estado": "pendiente",
+          "tests": "ejercicios/tests/test_semana_01.py::TestVectores",
+          "defendido": false,
+          "repasos": []
+        },
+        "combinaciones_lineales_y_span": {
+          "dia": "2026-10-20",
+          "estado": "pendiente",
+          "tests": "ejercicios/tests/test_semana_01.py::TestSpan",
+          "defendido": false,
+          "repasos": []
+        },
+        "transformaciones_lineales": {
+          "dia": "2026-10-21",
+          "estado": "pendiente",
+          "tests": "ejercicios/tests/test_semana_01.py::TestTransformaciones",
+          "defendido": false,
+          "repasos": []
+        },
+        "producto_punto_y_matmul": {
+          "dia": "2026-10-22",
+          "estado": "pendiente",
+          "tests": "ejercicios/tests/test_semana_01.py::TestProductoPunto",
+          "defendido": false,
+          "repasos": []
+        },
+        "neurona_a_mano": {
+          "dia": "2026-10-23",
+          "estado": "pendiente",
+          "tests": "ejercicios/tests/test_semana_01.py::TestNeurona",
+          "defendido": false,
+          "repasos": []
+        }
+      },
+      "mini_proyecto": {
+        "nombre": "Una neurona a mano",
+        "estado": "pendiente",
+        "repo": null,
+        "video": null
+      }
+    }
+  },
+  "temas_debiles": [],
+  "cola_de_repaso": [],
+  "retos_en_blanco": [],
+  "contenido_publicado": []
+}

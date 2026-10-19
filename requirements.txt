@@ -1,0 +1,5 @@
+# Solo lo imprescindible. Nada entra aqui antes de haberlo programado a mano.
+numpy>=1.26
+pytest>=8.0
+feedparser>=6.0      # noticias/traer.py
+requests>=2.31       # noticias/traer.py
