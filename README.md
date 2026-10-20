@@ -16,8 +16,6 @@ Cada hoja me muestra para qué sirve lo que estudio ese día y dónde se usa en 
 | 12 a 24 | Reverse engineering con C, ensamblador y Ghidra, en paralelo |
 | 9 a 24 | Agentes y sistemas con modelos de lenguaje, en paralelo |
 
-Esta semana estoy en vectores, combinaciones lineales, transformaciones y producto punto. El viernes programo una neurona a mano.
-
 El plan completo está en `plan/ruta.md`.
 
 ---
@@ -74,11 +72,3 @@ datos/             Protocolo para mis fotos de microscopio
 Un tema cuenta como aprendido solo si pasan sus tests y además puedo explicarlo línea por línea. Si no, vuelve a repaso a los 3, 7 y 21 días.
 
 Cada domingo sale un reporte de la semana.
-
----
-
-## A dónde quiero llegar
-
-Quiero entender esto a fondo para construir yo misma la infraestructura de mi startup. La idea que más me interesa es la lectura automática de placas y antibiogramas desde la foto de un celular, para laboratorios que no pueden pagar los equipos de cientos de miles de dólares.
-
-Eso está en `plan/posicionamiento.md`.
