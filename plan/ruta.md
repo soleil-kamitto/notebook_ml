@@ -98,12 +98,6 @@ Los agentes del tutor en la carpeta de agentes son el primer laboratorio: los us
 
 ---
 
-## Después de la semana 24
-
-Lo que sigue no se planifica todavía en detalle, pero la dirección es: papers de CV aplicada a microbiología, CUDA y optimización, y un problema real con datos propios que valga la pena resolver. La startup se funda sobre un problema entendido a fondo, no sobre una ola.
-
----
-
 ## Cómo se mide el avance
 
 - `progreso/progreso.json`: temas, estado (`pendiente` / `debil` / `dominado`), horas reales, fechas.
