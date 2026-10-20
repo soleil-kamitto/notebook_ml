@@ -94,7 +94,7 @@ Por qué está aquí: entender qué hace la máquina por debajo es lo que separa
 | 18–20 | RAG honesto: embeddings, recuperación, medición de la mejora |
 | 21–24 | Un agente que haga algo útil para mi investigación de CV |
 
-Los agentes del tutor en `.claude/agents/` son el primer laboratorio: los uso y los modifico.
+Los agentes del tutor en la carpeta de agentes son el primer laboratorio: los uso y los modifico.
 
 ---
 

@@ -66,9 +66,9 @@ El reporte semanal se genera solo en `progreso/`.
 python -m pytest ejercicios/tests/test_semana_01.py -v
 ```
 
-O dentro de el tutor: `/check`
+O con el comando `/check`
 
-Las funciones están vacías con un `raise NotImplementedError`. Las lleno yo. el tutor no las toca.
+Las funciones están vacías con un `raise NotImplementedError`. Las lleno yo y el tutor no las toca.
 
 ---
 
