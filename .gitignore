@@ -11,3 +11,6 @@ noticias/cache/
 datos/*
 !datos/README.md
 !datos/catalogo.csv
+
+# Config del editor, no se publica
+.claude/
