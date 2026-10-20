@@ -2,7 +2,7 @@
 
 Estoy aprendiendo inteligencia artificial desde cero, empezando por las matemáticas. Son 24 semanas, 6 días por semana, 7 horas al día. Todo lo programo a mano antes de usar cualquier librería.
 
-Soy Soleil, estudiante de Ingeniería de Sistemas y Computer Science en Lima. Investigo visión por computadora aplicada a microbiología.
+Soy Soleil, estudiante de Computer Science en Lima. Investigo visión por computadora aplicada a microbiología.
 
 Publico un video cada día de la serie "Día X aprendiendo IA desde cero".
 
