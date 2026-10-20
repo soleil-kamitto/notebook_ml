@@ -1,633 +1,369 @@
-<title>Mi espacio de estudio de IA</title>
+<title>Semana 1 · mi cuaderno</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap">
 
 <style>
-/* Layout: tablero de cuaderno. Arriba "hoy" con el recurso exacto; debajo la semana día por día,
-   el laboratorio de matrices editable, los comandos por síntoma y la biblioteca de fuentes. */
-:root {
-  --paper: #f4f3ee;
-  --paper-2: #eceade;
-  --ink: #16181f;
-  --ink-soft: #4b4f5c;
-  --rule: #c9c6b6;
-  --accent: #2f35e0;
-  --accent-2: #d8442a;
-  --ok: #1d7a4f;
-  --grid: rgba(22, 24, 31, .07);
-
-  --display: "Syne", "Trebuchet MS", sans-serif;
-  --body: "Newsreader", Georgia, serif;
-  --mono: "JetBrains Mono", "Consolas", monospace;
+/* Cuaderno rosa de hojas blancas mate. Una hoja por dia de la semana 1. */
+:root{
+  --mesa:#ffffff; --mesa-2:#fafafa;
+  --hoja:#fffefc; --borde:#ecdfe4; --sombra:rgba(160,110,130,.22);
+  --tinta:#2a2430; --suave:#6b6270; --lapiz:#a99ca6;
+  --rosa:#d4367f; --rosa-claro:#f3d3e0; --lila:#7a5bb5; --verde:#2f8a63;
+  --mano:"Caveat",cursive; --mano-2:"Patrick Hand",cursive;
+  --texto:"Newsreader",Georgia,serif; --mono:"JetBrains Mono",monospace;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #10121a; --paper-2: #171a24; --ink: #eceadf; --ink-soft: #9a9fb0;
-    --rule: #2e3340; --accent: #8d93ff; --accent-2: #ff7a5c; --ok: #4fd398;
-    --grid: rgba(236, 234, 223, .07); color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #10121a; --paper-2: #171a24; --ink: #eceadf; --ink-soft: #9a9fb0;
-  --rule: #2e3340; --accent: #8d93ff; --accent-2: #ff7a5c; --ok: #4fd398;
-  --grid: rgba(236, 234, 223, .07); color-scheme: dark;
-}
+/* Cuaderno de papel: siempre claro, aunque el sistema esté en oscuro. */
+:root{color-scheme:light}
 
-* { box-sizing: border-box; }
-body {
-  background: var(--paper); color: var(--ink);
-  font-family: var(--body); font-size: 1.0625rem; line-height: 1.6; margin: 0;
-  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 28px 28px, 28px 28px;
-}
-.band { border-bottom: 1px solid var(--rule); }
-.band--ink { background: var(--paper-2); }
-.wrap {
-  max-width: 70rem; margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 3.4rem;
-}
-.wrap--tight { padding-block: 2.2rem; }
+*{box-sizing:border-box}
+body{margin:0;color:var(--tinta);font-family:var(--texto);line-height:1.6;
+  background:var(--mesa);
+  background-image:repeating-conic-gradient(var(--mesa) 0% 25%,var(--mesa-2) 0% 50%);
+  background-size:4px 4px}
+.escena{padding-block:clamp(1rem,4vw,2.4rem);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-h1, h2, h3, h4 { font-family: var(--display); font-weight: 800; text-wrap: balance; line-height: 1.1; margin: 0; letter-spacing: -.02em; }
-h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); }
-h3 { font-size: 1.15rem; font-weight: 700; }
-h4 { font-size: .98rem; font-weight: 700; letter-spacing: 0; }
-p { margin: 0; }
-a { color: var(--accent); text-underline-offset: 3px; }
-.stack { display: flex; flex-direction: column; gap: 1rem; }
-.prose { max-width: 62ch; }
-code, .mono { font-family: var(--mono); font-size: .88em; }
-code { background: var(--paper-2); border: 1px solid var(--rule); padding: .05em .35em; }
-.soft { color: var(--ink-soft); }
-.sm { font-size: .93rem; }
+/* ---- tapa ---- */
+.tapa-zona{display:flex;flex-direction:column;align-items:center;gap:1rem}
+.tapa{all:unset;cursor:pointer;position:relative;width:min(20rem,78vw);aspect-ratio:3/3.9;
+  background:linear-gradient(100deg,#e05596 0%,#d4367f 30%,#c22c73 70%,#a32260 100%);
+  border-radius:4px 14px 14px 4px;box-shadow:0 22px 44px var(--sombra),inset -6px 0 14px rgba(0,0,0,.14);
+  transition:transform .3s ease;transform-origin:left center}
+.tapa:hover,.tapa:focus-visible{transform:rotateY(-11deg) translateX(3px)}
+.tapa .anillos{position:absolute;left:9px;top:12%;bottom:12%;width:11px;border-radius:6px;
+  background:repeating-linear-gradient(transparent 0 7%,rgba(255,255,255,.8) 7% 11%,transparent 11% 22%)}
+.tapa .brillo{position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(80deg,rgba(255,255,255,.24) 0 13%,transparent 32%,rgba(255,255,255,.1) 64%,transparent 82%)}
+.sello{position:absolute;right:1.2rem;top:1.4rem;text-align:right;color:#fff;line-height:1.05}
+.sello b{display:block;font-family:var(--mano);font-size:2.4rem}
+.sello span{display:block;font-family:var(--mano-2);font-size:.88rem;opacity:.92}
+.tapa-pie{position:absolute;left:2.2rem;bottom:1.3rem;font-family:var(--mano-2);color:rgba(255,255,255,.85);font-size:.88rem}
+.abrir{font-family:var(--mano-2);color:var(--suave)}
 
-.eyebrow {
-  font-family: var(--mono); font-size: .72rem; font-weight: 500; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--ink-soft); margin: 0 0 1.1rem;
-  display: flex; align-items: center; gap: .7rem;
-}
-.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+/* ---- hoja ---- */
+.cuaderno{max-width:46rem;margin:0 auto;perspective:2000px}
+.hoja{position:relative;background:var(--hoja);border:1px solid var(--borde);border-radius:3px 10px 10px 3px;
+  box-shadow:0 16px 36px var(--sombra);padding:clamp(1.5rem,4vw,2.4rem) clamp(1.1rem,4vw,2.4rem) 2.6rem clamp(2.5rem,7vw,3.8rem);
+  animation:pasar .4s ease-out;transform-origin:left center}
+@keyframes pasar{from{transform:rotateY(-12deg);opacity:.6}to{transform:none;opacity:1}}
+.hoja::before{content:"";position:absolute;left:0;top:0;bottom:0;width:24px;
+  background:repeating-linear-gradient(transparent 0 15px,var(--borde) 15px 18px,transparent 18px 36px)}
+.hoja::after{content:"";position:absolute;left:clamp(2rem,6vw,3.1rem);top:0;bottom:0;width:1px;background:var(--rosa);opacity:.3}
+.folio{position:absolute;right:1.2rem;bottom:.8rem;font-family:var(--mano-2);color:var(--lapiz);font-size:.88rem}
 
-/* ---------- cabecera ---------- */
-.top { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: flex-end; justify-content: space-between; }
-.top h1 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); }
-.top h1 em { font-style: normal; color: var(--accent); }
-.stamp { font-family: var(--mono); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); text-align: right; }
-.stamp b { display: block; color: var(--ink); font-size: 1.05rem; letter-spacing: 0; text-transform: none; font-weight: 500; }
+h1,h2,h3{font-family:var(--mano);margin:0;line-height:1.15;font-weight:700;text-wrap:balance}
+h2{font-size:clamp(1.8rem,5vw,2.5rem);color:var(--rosa)}
+h3{font-size:1.2rem}
+p{margin:0}
+a{color:var(--lila)}
+.sub{font-family:var(--mano-2);color:var(--suave)}
+.sm{font-size:.94rem}.soft{color:var(--suave)}
+.stack{display:flex;flex-direction:column;gap:1rem}
+code,.mono{font-family:var(--mono);font-size:.85em}
+code{background:var(--rosa-claro);border-radius:3px;padding:.05em .3em}
+.linea{border-bottom:3px solid var(--rosa-claro);padding-bottom:.15rem}
 
-/* ---------- panel de hoy ---------- */
-.today { border: 1px solid var(--ink); background: var(--paper); margin-top: 2rem; }
-.today-head {
-  display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: baseline; justify-content: space-between;
-  padding: 1rem 1.3rem; border-bottom: 1px solid var(--rule); background: var(--paper-2);
-}
-.today-head .when { font-family: var(--mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-2); }
-.today-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 1px; background: var(--rule); }
-.cell { background: var(--paper); padding: 1.3rem; display: flex; flex-direction: column; gap: .55rem; min-width: 0; }
-.cell .lbl { font-family: var(--mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
-.res { display: flex; flex-direction: column; gap: .3rem; }
-.res a { font-family: var(--display); font-weight: 700; font-size: 1.1rem; text-decoration: none; border-bottom: 2px solid var(--accent); align-self: flex-start; line-height: 1.25; }
-.res a:hover { background: var(--accent); color: var(--paper); }
-.res .src { font-family: var(--mono); font-size: .72rem; color: var(--ink-soft); }
-.checks { display: flex; flex-direction: column; gap: .45rem; margin-top: .2rem; }
-.checks label { display: flex; gap: .6rem; align-items: flex-start; font-size: .96rem; cursor: pointer; }
-.checks input { margin: .32rem 0 0; accent-color: var(--accent); flex: none; }
-.checks input:checked + span { color: var(--ink-soft); text-decoration: line-through; }
-.daybar { display: flex; flex-wrap: wrap; gap: .4rem; padding: .9rem 1.3rem; border-top: 1px solid var(--rule); background: var(--paper-2); align-items: center; }
-.daybar .lbl { font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-right: .3rem; }
-.dbtn {
-  font-family: var(--mono); font-size: .76rem; padding: .3rem .6rem; cursor: pointer;
-  background: var(--paper); border: 1px solid var(--rule); color: var(--ink);
-}
-.dbtn:hover { border-color: var(--accent); color: var(--accent); }
-.dbtn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--paper); font-weight: 700; }
+/* ---- bloques del día ---- */
+.totales{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.pastilla{font-family:var(--mono);font-size:.72rem;border:1px solid var(--borde);border-radius:14px;padding:.25rem .65rem;color:var(--suave)}
+.pastilla b{color:var(--rosa);font-weight:500}
+.bloque{display:grid;grid-template-columns:5.4rem 1fr;gap:.9rem;padding-block:.9rem;border-bottom:1px dotted var(--borde)}
+.bloque>*{min-width:0}
+.hora{font-family:var(--mono);font-size:.74rem;color:var(--rosa);padding-top:.25rem;line-height:1.5}
+.hora b{display:block;color:var(--suave);font-weight:400;font-size:.7rem}
+.tarea{display:flex;flex-direction:column;gap:.35rem}
+.tarea .q{font-family:var(--mano);font-size:1.3rem}
+.recurso{font-family:var(--mano);font-size:1.25rem;color:var(--lila);text-decoration:none;border-bottom:2px solid var(--lila);align-self:flex-start}
+.lista{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:.3rem;font-size:.94rem;color:var(--suave)}
+.chk{display:flex;gap:.55rem;align-items:flex-start;font-size:.95rem;cursor:pointer}
+.chk input{margin-top:.3rem;accent-color:var(--rosa);flex:none}
+.chk input:checked+span{color:var(--lapiz);text-decoration:line-through}
+.caja{border:2px solid var(--rosa-claro);border-radius:6px;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
+.caja.graba{border-color:var(--rosa)}
+.caja .tit{font-family:var(--mano);font-size:1.3rem;color:var(--rosa)}
+.caja .tit.v{color:var(--verde)}
+.guion{display:grid;grid-template-columns:3.4rem 1fr;gap:.3rem .7rem;font-size:.93rem;align-items:baseline}
+.guion .s{font-family:var(--mono);font-size:.7rem;color:var(--lapiz)}
+.apuntes{width:100%;min-height:9rem;background:transparent;border:none;resize:vertical;color:var(--tinta);
+  font-family:var(--mano);font-size:1.3rem;line-height:1.9rem;
+  background-image:repeating-linear-gradient(transparent 0 1.85rem,var(--borde) 1.85rem 1.9rem)}
+.apuntes:focus-visible{outline:none}
 
-/* ---------- semana ---------- */
-.week { display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
-.wrow {
-  display: grid; grid-template-columns: 5.5rem 1.35fr 1fr; gap: 1.4rem;
-  padding-block: 1.3rem; border-bottom: 1px solid var(--rule); align-items: start;
-}
-.wrow > * { min-width: 0; }
-.wd { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); padding-top: .2rem; }
-.wd b { display: block; color: var(--ink); font-size: .95rem; letter-spacing: 0; text-transform: none; }
-.wrow--rest { opacity: .72; }
-
-/* ---------- laboratorio ---------- */
-.lab { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-.plot { border: 1px solid var(--ink); background: var(--paper); }
-.plot canvas { display: block; width: 100%; height: auto; max-width: 100%; }
-.plot-bar {
-  border-top: 1px solid var(--rule); padding: .55rem .75rem; font-family: var(--mono); font-size: .72rem;
-  color: var(--ink-soft); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-}
-.plot-bar b { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
-.matrix { display: flex; gap: .8rem; align-items: center; font-family: var(--mono); }
-.matrix .br { font-size: 3.4rem; color: var(--ink-soft); line-height: 1; font-weight: 300; }
-.mgrid { display: grid; grid-template-columns: repeat(2, 4.6rem); gap: .5rem; }
-.mgrid input {
-  font-family: var(--mono); font-size: 1rem; text-align: center; padding: .45rem .2rem;
-  background: var(--paper); color: var(--ink); border: 1px solid var(--rule); width: 100%;
-}
-.mgrid input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-.presets { display: flex; flex-wrap: wrap; gap: .4rem; }
-.q { border-left: 3px solid var(--accent-2); padding-left: 1rem; }
-
-/* ---------- comandos por síntoma ---------- */
-.cmds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
-.cmd { background: var(--paper); padding: 1.2rem; display: flex; flex-direction: column; gap: .45rem; min-width: 0; }
-.cmd .sym { font-family: var(--display); font-weight: 800; font-size: 1.02rem; letter-spacing: -.01em; }
-.cmd .name { font-family: var(--mono); font-size: .9rem; font-weight: 700; color: var(--accent); }
-.cmd p { font-size: .93rem; color: var(--ink-soft); }
-
-/* ---------- biblioteca ---------- */
-.lib { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.6rem 2rem; }
-.lib section { display: flex; flex-direction: column; gap: .7rem; min-width: 0; }
-.lib ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .55rem; }
-.lib li { display: flex; flex-direction: column; gap: .1rem; font-size: .95rem; }
-.lib li .note { font-family: var(--mono); font-size: .71rem; color: var(--ink-soft); }
-.lib h4 { padding-bottom: .4rem; border-bottom: 1px solid var(--rule); }
-
-/* ---------- fases ---------- */
-.phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
-.ph { background: var(--paper); padding: 1.2rem; display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
-.ph .n { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; color: var(--ink-soft); }
-.ph.now { background: var(--paper-2); box-shadow: inset 3px 0 0 var(--accent); }
-.ph .now-tag { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
-
-footer .wrap { padding-block: 1.8rem; display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; justify-content: space-between; font-family: var(--mono); font-size: .73rem; color: var(--ink-soft); }
-
-@media (max-width: 900px) {
-  .today-grid, .lab, .cmds { grid-template-columns: 1fr; }
-  .wrow { grid-template-columns: 4.6rem 1fr; }
-  .wrow > :last-child { grid-column: 2; }
-  .wrap { padding-block: 2.4rem; }
-  .stamp { text-align: left; }
-}
-@media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+/* ---- navegación ---- */
+.barra{max-width:46rem;margin:1rem auto 0;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;align-items:center}
+.pasar{font-family:var(--mano-2);background:var(--hoja);color:var(--tinta);border:1px solid var(--borde);
+  border-radius:18px;padding:.4rem 1rem;cursor:pointer;box-shadow:0 4px 12px var(--sombra)}
+.pasar:disabled{opacity:.4;cursor:default}
+.pasar:hover:not(:disabled){color:var(--rosa);border-color:var(--rosa)}
+.pags{display:flex;gap:.3rem;flex-wrap:wrap}
+.pag{width:2rem;height:1.7rem;border-radius:12px;border:1px solid var(--borde);background:var(--hoja);
+  color:var(--suave);font-family:var(--mano-2);font-size:.78rem;cursor:pointer}
+.pag[aria-current="true"]{background:var(--rosa);color:#fff;border-color:var(--rosa)}
+.caja.porque{border-color:var(--lila);background:linear-gradient(180deg,rgba(122,91,181,.05),transparent)}
+.caja.porque .tit{color:var(--lila);font-size:1.45rem}
+.caja.porque .lista li{color:var(--tinta)}
+.logro{font-family:var(--mano);font-size:1.25rem;color:var(--verde);margin-top:.4rem}
+.fuente{padding-block:.5rem;border-bottom:1px dotted var(--borde);display:flex;flex-direction:column;gap:.1rem}
+.fuente a{font-family:var(--mano);font-size:1.2rem;text-decoration:none;border-bottom:2px solid var(--lila)}
+.fuente .tipo{font-family:var(--mono);font-size:.66rem;color:var(--lapiz);text-transform:uppercase;letter-spacing:.08em}
+.flotante{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  z-index:20;font-family:var(--mano-2);background:var(--rosa);color:#fff;border:none;border-radius:20px;
+  padding:.55rem 1.1rem;cursor:pointer;box-shadow:0 8px 20px var(--sombra)}
+.modal{position:fixed;inset:0;z-index:30;background:rgba(40,25,35,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal-caja{background:var(--hoja);border-radius:10px;padding:1.5rem;max-width:24rem;width:100%;
+  display:flex;flex-direction:column;gap:.6rem;box-shadow:0 20px 50px var(--sombra)}
+.modal-caja h3{color:var(--rosa);font-size:1.6rem}
+.hfila{display:flex;flex-direction:column;padding-block:.4rem;border-bottom:1px dotted var(--borde)}
+.hfila b{font-family:var(--mono);font-size:.8rem;color:var(--rosa);font-weight:500}
+.hfila span{font-size:.93rem;color:var(--suave)}
+@media (max-width:560px){.bloque{grid-template-columns:4.4rem 1fr}.guion{grid-template-columns:3rem 1fr}}
+@media (prefers-reduced-motion:reduce){.hoja{animation:none}.tapa{transition:none}}
 </style>
 
-<header class="band">
-  <div class="wrap wrap--tight">
-    <div class="top">
-      <div>
-        <h1>Hoy toca <em id="h-topic">álgebra lineal</em></h1>
-        <p class="soft sm" style="margin-top:.5rem">Fase 1 · semana 1 de 24 · lunes a sábado, domingo descanso</p>
-      </div>
-      <p class="stamp"><b id="h-date">—</b><span id="h-block">—</span></p>
-    </div>
+<div class="escena">
+  <div class="tapa-zona" id="tapaZona">
+    <button class="tapa" id="tapa" type="button" aria-label="Abrir el cuaderno">
+      <span class="anillos" aria-hidden="true"></span><span class="brillo" aria-hidden="true"></span>
+      <span class="sello"><b>Semana 1</b><span>álgebra lineal</span></span>
+      <span class="tapa-pie">Soleil · 2026</span>
+    </button>
+    <p class="abrir">toca para abrir →</p>
+  </div>
 
-    <div class="today">
-      <div class="today-head">
-        <h2 id="t-title">—</h2>
-        <span class="when" id="t-when">—</span>
-      </div>
-      <div class="today-grid">
-        <div class="cell">
-          <span class="lbl">08:00 – 12:00 · estudio profundo</span>
-          <div class="res" id="t-res"></div>
-          <p class="sm soft" id="t-read"></p>
-        </div>
-        <div class="cell">
-          <span class="lbl">14:00 – 17:00 · práctica</span>
-          <p class="sm" id="t-prac"></p>
-          <div class="checks" id="t-checks"></div>
-        </div>
-      </div>
-      <div class="daybar">
-        <span class="lbl">ver otro día</span>
-        <button class="dbtn" type="button" data-d="1">lun</button>
-        <button class="dbtn" type="button" data-d="2">mar</button>
-        <button class="dbtn" type="button" data-d="3">mié</button>
-        <button class="dbtn" type="button" data-d="4">jue</button>
-        <button class="dbtn" type="button" data-d="5">vie</button>
-        <button class="dbtn" type="button" data-d="6">sáb</button>
-        <button class="dbtn" type="button" data-d="0">dom</button>
-      </div>
+  <div class="cuaderno" id="cuaderno" hidden>
+    <article class="hoja" id="hoja">
+      <h2 class="linea" id="h-dia">—</h2>
+      <p class="sub" id="h-tema" style="margin-top:.5rem"></p>
+      <div class="totales" id="h-totales"></div>
+      <div id="h-bloques" style="margin-top:.6rem"></div>
+      <div id="h-extra"></div>
+      <span class="folio" id="h-folio"></span>
+    </article>
+  </div>
+
+  <button class="flotante" id="verHorario" type="button">⏰ horario</button>
+  <div class="modal" id="modal" hidden>
+    <div class="modal-caja">
+      <h3>Mi horario</h3>
+      <p class="sm soft">Lunes a sábado. Domingo descanso.</p>
+      <div class="hfila"><b>08:00 – 12:00</b><span>Estudio profundo: video, papel y lectura</span></div>
+      <div class="hfila"><b>14:00 – 17:00</b><span>Práctica: ejercicios y tests, sin autocompletado</span></div>
+      <div class="hfila"><b>19:00 – 20:00</b><span>Contenido: grabar y publicar</span></div>
+      <p class="sm soft">7 horas al día · 42 a la semana</p>
+      <button class="pasar" id="cerrar" type="button">cerrar</button>
     </div>
   </div>
-</header>
 
-<section class="band band--ink">
-  <div class="wrap">
-    <p class="eyebrow">Laboratorio · transformaciones lineales</p>
-    <div class="lab">
-      <div class="stack">
-        <h2>Escribe la matriz y mira qué le hace al plano.</h2>
-        <p class="sm soft">Las columnas de la matriz son a dónde aterrizan î y ĵ. El área sombreada es el cuadrado unidad después de la transformación: su área es el determinante. Esto es para mirar antes de programarlo, no en vez de programarlo.</p>
-        <div class="matrix">
-          <span class="br" aria-hidden="true">[</span>
-          <div class="mgrid">
-            <input id="a" type="number" step="0.1" value="1" aria-label="fila 1 columna 1">
-            <input id="b" type="number" step="0.1" value="0.75" aria-label="fila 1 columna 2">
-            <input id="c" type="number" step="0.1" value="0" aria-label="fila 2 columna 1">
-            <input id="d" type="number" step="0.1" value="1" aria-label="fila 2 columna 2">
-          </div>
-          <span class="br" aria-hidden="true">]</span>
-        </div>
-        <div class="presets">
-          <button class="dbtn" type="button" data-m="1,0,0,1">identidad</button>
-          <button class="dbtn" type="button" data-m="1,0.75,0,1">cizalla</button>
-          <button class="dbtn" type="button" data-m="0.866,-0.5,0.5,0.866">rotar 30°</button>
-          <button class="dbtn" type="button" data-m="-1,0,0,1">reflejar en y</button>
-          <button class="dbtn" type="button" data-m="2,0,0,0.5">estirar y achatar</button>
-          <button class="dbtn" type="button" data-m="1,2,0.5,1">det 0</button>
-        </div>
-        <div class="q">
-          <p class="sm"><b>Para responder sin mirar:</b> ¿qué le pasa al plano cuando el determinante sale 0? ¿Y cuando sale negativo? Si la respuesta no te sale sola, ese es el tema de <code>/explicar determinante</code>.</p>
-        </div>
-      </div>
-
-      <figure class="plot" style="margin:0">
-        <canvas id="grid" width="760" height="620" aria-label="Malla de coordenadas transformada por la matriz, con los vectores base i y j y el cuadrado unidad"></canvas>
-        <figcaption class="plot-bar">
-          <span>î → <b id="o-i">(1.00, 0.00)</b></span>
-          <span>ĵ → <b id="o-j">(0.75, 1.00)</b></span>
-          <span>det <b id="o-det">1.00</b></span>
-        </figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <p class="eyebrow">Semana 1 · día por día</p>
-    <div class="stack" style="margin-bottom:1.6rem">
-      <h2>Cada día deja una pieza que el día siguiente necesita.</h2>
-      <p class="prose sm soft">El viernes no aparece nada nuevo: la neurona se arma con el producto punto del jueves. Si un día queda a medias, se mueve el resto, no se salta.</p>
-    </div>
-
-    <div class="week">
-      <article class="wrow">
-        <p class="wd">lun<b>Cap. 1</b></p>
-        <div class="stack" style="gap:.35rem">
-          <h3><a href="https://www.youtube.com/watch?v=fNk_zzaMoSs">Vectores, ¿qué son realmente?</a></h3>
-          <p class="sm soft">3Blue1Brown · <i>Essence of Linear Algebra</i>. Lectura: <i>Mathematics for Machine Learning</i>, cap. 2.1–2.2.</p>
-        </div>
-        <p class="sm">Programar: una clase <code>Vector</code> en Python puro con suma y multiplicación por escalar. Sin NumPy.</p>
-      </article>
-
-      <article class="wrow">
-        <p class="wd">mar<b>Cap. 2</b></p>
-        <div class="stack" style="gap:.35rem">
-          <h3><a href="https://www.youtube.com/watch?v=k7RM-ot2NWY">Combinaciones lineales, span y vectores base</a></h3>
-          <p class="sm soft">3Blue1Brown · cap. 2. Lectura: MML 2.5 (bases e independencia lineal).</p>
-        </div>
-        <p class="sm">Programar: <code>combinacion_lineal(vectores, pesos)</code> y una función que diga si un vector está en el span de otros dos.</p>
-      </article>
-
-      <article class="wrow">
-        <p class="wd">mié<b>Cap. 3</b></p>
-        <div class="stack" style="gap:.35rem">
-          <h3><a href="https://www.youtube.com/watch?v=kYB8IZa5AuE">Transformaciones lineales y matrices</a></h3>
-          <p class="sm soft">3Blue1Brown · cap. 3. Lectura: MML 2.7.</p>
-        </div>
-        <p class="sm">Programar: aplicar una matriz 2×2 a un vector a mano, y comprobar en el laboratorio de arriba que da lo mismo.</p>
-      </article>
-
-      <article class="wrow">
-        <p class="wd">jue<b>Cap. 4 y 9</b></p>
-        <div class="stack" style="gap:.35rem">
-          <h3><a href="https://www.youtube.com/watch?v=XkY2DOUCWMU">Multiplicación de matrices como composición</a> · <a href="https://www.youtube.com/watch?v=LyGKycYT2v0">Producto punto y dualidad</a></h3>
-          <p class="sm soft">3Blue1Brown · caps. 4 y 9. Lectura: MML 3.1–3.2 (producto interno).</p>
-        </div>
-        <p class="sm">Programar: <code>matmul</code> con bucles y <code>producto_punto</code>. Esta es la pieza del viernes, hazla bien.</p>
-      </article>
-
-      <article class="wrow">
-        <p class="wd">vie<b>Proyecto</b></p>
-        <div class="stack" style="gap:.35rem">
-          <h3>Una neurona a mano: <span class="mono">y = f(w · x + b)</span></h3>
-          <p class="sm soft">Sin video nuevo. Reusa el producto punto del jueves, agrega el sesgo y una activación.</p>
-        </div>
-        <p class="sm">Después: la misma neurona en NumPy y comparar resultados y líneas de código. Ahí se ve qué estaba delegando.</p>
-      </article>
-
-      <article class="wrow">
-        <p class="wd">sáb<b>Cierre</b></p>
-        <div class="stack" style="gap:.35rem">
-          <h3>Repaso, publicar y grabar</h3>
-          <p class="sm soft">Volver a lo que costó, no a lo que salió fácil.</p>
-        </div>
-        <p class="sm">Subir el mini proyecto a GitHub con su README y grabar el video de la semana.</p>
-      </article>
-
-      <article class="wrow wrow--rest">
-        <p class="wd">dom<b>Descanso</b></p>
-        <div class="stack" style="gap:.35rem">
-          <h3>Reporte semanal automático</h3>
-          <p class="sm soft">Se genera en <code>progreso/</code>: horas reales, temas dominados, temas débiles.</p>
-        </div>
-        <p class="sm">Los temas débiles vuelven solos a repaso días después.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="band band--ink">
-  <div class="wrap">
-    <p class="eyebrow">Cuando me trabo</p>
-    <div class="stack" style="margin-bottom:1.6rem">
-      <h2>Qué escribirle al tutor según lo que me está pasando.</h2>
-      <p class="prose sm soft">Claude nunca escribe la solución de un ejercicio: da pistas, preguntas o la explicación del concepto. La solución solo aparece si escribo exactamente <code>me rindo</code>. Autocompletado de IA apagado mientras programo: el objetivo es poder escribirlo sola.</p>
-    </div>
-    <div class="cmds">
-      <div class="cmd">
-        <p class="sym">Me senté y no sé por dónde empezar</p>
-        <span class="name">/hoy</span>
-        <p>Mira mi progreso real y me da el video o la lectura exacta de hoy y los ejercicios que van con eso. No el plan entero, solo el día.</p>
-      </div>
-      <div class="cmd">
-        <p class="sym">Escribí la función y no sé si está bien</p>
-        <span class="name">/check</span>
-        <p>Corre los tests de <code>ejercicios/</code> y me dice qué pasa y qué falla, con la pista de por qué falla, sin darme el código.</p>
-      </div>
-      <div class="cmd">
-        <p class="sym">Leí el concepto tres veces y no lo entiendo</p>
-        <span class="name">/explicar &lt;tema&gt;</span>
-        <p>Lo explica con analogías simples y después me hace 3 preguntas, para que no me quede con la sensación de haber entendido.</p>
-      </div>
-      <div class="cmd">
-        <p class="sym">Los tests pasan pero no sé si entendí</p>
-        <span class="name">/defender &lt;tema&gt;</span>
-        <p>Me examina línea por línea: qué hace cada una, qué cuesta en función de n, qué pasa en los bordes y cómo se optimiza. Decide si el tema queda dominado.</p>
-      </div>
-      <div class="cmd">
-        <p class="sym">Quiero saber si todavía lo sé</p>
-        <span class="name">/reto</span>
-        <p>Reto en blanco: reescribir de memoria una función ya resuelta. 20 minutos, sin mirar nada, sin pistas durante el reto.</p>
-      </div>
-      <div class="cmd">
-        <p class="sym">Terminé el día</p>
-        <span class="name">/cierre</span>
-        <p>Me pregunta qué aprendí y qué me costó, lo guarda en <code>diario/</code>, actualiza <code>progreso.json</code> y propone la idea de video de 1 minuto.</p>
-      </div>
-      <div class="cmd">
-        <p class="sym">No sé si voy bien o me estoy atrasando</p>
-        <span class="name">/semana</span>
-        <p>Horas reales, temas dominados, temas débiles y si voy atrasada. Me lo dice directo y reajusta el plan sin hacerlo más liviano.</p>
-      </div>
-      <div class="cmd">
-        <p class="sym">Quiero saber qué pasó en IA hoy</p>
-        <span class="name">/noticias</span>
-        <p>Trae papers y posts filtrados por mis palabras clave y por el tema de la semana, para no leer todo lo que salió.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <p class="eyebrow">Mis fuentes</p>
-    <div class="stack" style="margin-bottom:1.8rem">
-      <h2>Todo lo que necesito abrir, en un solo lugar.</h2>
-    </div>
-    <div class="lib">
-      <section>
-        <h4>Fase 1 · matemáticas</h4>
-        <ul>
-          <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">Essence of Linear Algebra</a><span class="note">3Blue1Brown · 16 capítulos · playlist</span></li>
-          <li><a href="https://www.3blue1brown.com/topics/calculus">Essence of Calculus</a><span class="note">3Blue1Brown · semanas 5–8</span></li>
-          <li><a href="https://mml-book.com">Mathematics for Machine Learning</a><span class="note">PDF gratis en el sitio oficial · Deisenroth, Faisal, Ong</span></li>
-          <li><a href="https://www.3blue1brown.com/lessons/eola-preview">Preview de la serie</a><span class="note">para volver cuando pierda el hilo</span></li>
-        </ul>
-      </section>
-      <section>
-        <h4>Fase 2 · redes desde cero</h4>
-        <ul>
-          <li><a href="https://karpathy.ai/zero-to-hero.html">Neural Networks: Zero to Hero</a><span class="note">Karpathy · de micrograd a un mini GPT</span></li>
-          <li><a href="https://github.com/karpathy/nn-zero-to-hero">nn-zero-to-hero</a><span class="note">los notebooks de cada clase</span></li>
-        </ul>
-      </section>
-      <section>
-        <h4>Fase 3 · computer vision</h4>
-        <ul>
-          <li><a href="https://huggingface.co/papers">Hugging Face Daily Papers</a><span class="note">lo que vale leer cada día</span></li>
-          <li><a href="https://arxiv.org/list/cs.CV/recent">arXiv cs.CV</a><span class="note">visión · también cs.LG y cs.AI</span></li>
-          <li><a href="https://pytorch.org/tutorials/">Tutoriales de PyTorch</a><span class="note">solo después de haberlo hecho a mano</span></li>
-        </ul>
-      </section>
-      <section>
-        <h4>Fase 4 · reverse engineering</h4>
-        <ul>
-          <li><a href="https://picoctf.org/">picoCTF</a><span class="note">retos por nivel, desde cero</span></li>
-          <li><a href="https://crackmes.one/">crackmes.one</a><span class="note">binarios para practicar</span></li>
-          <li><a href="https://ghidra-sre.org/">Ghidra</a><span class="note">el desensamblador que voy a usar</span></li>
-        </ul>
-      </section>
-    </div>
-  </div>
-</section>
-
-<section class="band band--ink">
-  <div class="wrap wrap--tight">
-    <p class="eyebrow">Las 24 semanas</p>
-    <div class="phases">
-      <div class="ph now">
-        <p class="n">sem 1–8</p>
-        <span class="now-tag">aquí estoy</span>
-        <h3>Matemáticas para ML</h3>
-        <p class="sm soft">Álgebra lineal, cálculo, probabilidad y estadística. Primero Python puro, después NumPy.</p>
-      </div>
-      <div class="ph">
-        <p class="n">sem 9–16</p>
-        <h3>Redes desde cero</h3>
-        <p class="sm soft">De micrograd a un mini GPT, con la backprop escrita a mano.</p>
-      </div>
-      <div class="ph">
-        <p class="n">sem 17–24</p>
-        <h3>Computer Vision</h3>
-        <p class="sm soft">CNNs, PyTorch y proyectos con imágenes de microbiología.</p>
-      </div>
-      <div class="ph">
-        <p class="n">sem 12–24 · en paralelo</p>
-        <h3>Reverse engineering</h3>
-        <p class="sm soft">C, ensamblador x86 y Ghidra, con menos horas por semana.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="band">
-  <div class="wrap">
-    <span>Día X aprendiendo IA desde cero · Soleil</span>
-    <span>progreso/progreso.json es la fuente de verdad</span>
-  </div>
-</footer>
+  <nav class="barra">
+    <button class="pasar" id="prev" type="button">← volver</button>
+    <div class="pags" id="pags"></div>
+    <button class="pasar" id="next" type="button">pasar hoja →</button>
+  </nav>
+</div>
 
 <script>
-/* ---------- panel de hoy ---------- */
-(function () {
-  var dias = {
-    1: { t: "Vectores, ¿qué son realmente?", when: "lunes · cap. 1", topic: "vectores",
-         link: "https://www.youtube.com/watch?v=fNk_zzaMoSs", src: "3Blue1Brown · Essence of Linear Algebra, cap. 1",
-         read: "Lectura: Mathematics for Machine Learning, cap. 2.1–2.2.",
-         prac: "Una clase Vector en Python puro: suma y multiplicación por escalar. Sin NumPy.",
-         checks: ["Vi el capítulo completo sin acelerarlo", "Escribí Vector.suma y Vector.escalar", "Puedo dibujar a mano 2v + w"] },
-    2: { t: "Combinaciones lineales, span y base", when: "martes · cap. 2", topic: "span y bases",
-         link: "https://www.youtube.com/watch?v=k7RM-ot2NWY", src: "3Blue1Brown · cap. 2",
-         read: "Lectura: MML 2.5, bases e independencia lineal.",
-         prac: "combinacion_lineal(vectores, pesos) y una función que diga si un vector está en el span de otros dos.",
-         checks: ["Vi el capítulo", "Programé combinacion_lineal", "Puedo explicar span con mis palabras"] },
-    3: { t: "Transformaciones lineales y matrices", when: "miércoles · cap. 3", topic: "transformaciones lineales",
-         link: "https://www.youtube.com/watch?v=kYB8IZa5AuE", src: "3Blue1Brown · cap. 3",
-         read: "Lectura: MML 2.7.",
-         prac: "Aplicar una matriz 2×2 a un vector a mano y comprobarlo en el laboratorio de esta página.",
-         checks: ["Vi el capítulo", "Apliqué la matriz a mano y me dio igual que el laboratorio", "Sé qué son las columnas de una matriz"] },
-    4: { t: "Matrices como composición y producto punto", when: "jueves · caps. 4 y 9", topic: "producto punto",
-         link: "https://www.youtube.com/watch?v=XkY2DOUCWMU", src: "3Blue1Brown · cap. 4, y después el cap. 9 (producto punto)",
-         read: "Lectura: MML 3.1–3.2, producto interno.",
-         prac: "matmul con bucles y producto_punto. Es la pieza que usa la neurona del viernes.",
-         checks: ["Vi los dos capítulos", "Programé matmul con bucles", "Programé producto_punto", "Entiendo por qué el producto punto mide proyección"] },
-    5: { t: "Una neurona a mano", when: "viernes · mini proyecto", topic: "la neurona",
-         link: "", src: "Sin video nuevo: reusar el producto punto del jueves.",
-         read: "y = f(w · x + b), con w · x = Σ wᵢxᵢ.",
-         prac: "La neurona en Python puro, después la misma en NumPy, y comparar resultados y líneas de código.",
-         checks: ["Neurona en Python puro funcionando", "La misma en NumPy", "Comparé y entendí qué delega NumPy"] },
-    6: { t: "Repaso, publicar y grabar", when: "sábado · cierre de semana", topic: "repaso",
-         link: "", src: "Volver a lo que costó, no a lo que salió fácil.",
-         read: "Revisar el diario de la semana y los temas marcados como débiles.",
-         prac: "Subir el mini proyecto a GitHub con su README y grabar el video de la semana.",
-         checks: ["Repasé los temas débiles", "Proyecto en GitHub con README", "Video grabado"] },
-    0: { t: "Descanso", when: "domingo", topic: "descanso",
-         link: "", src: "Hoy no se estudia.",
-         read: "El reporte semanal se genera solo en progreso/.",
-         prac: "Si acaso: leer el reporte y mirar qué vuelve a repaso la semana que viene.",
-         checks: ["Leí el reporte semanal"] }
-  };
+var DIAS=[
+{d:1,porque:"Hoy no aprendo “vectores”: aprendo a representar cualquier cosa como números.",puntos:["Una foto de microscopio es una lista de números. Un texto también. Un audio también. Esa lista ES un vector.","Por eso en Python todo se guarda en listas y arrays: sumar dos imágenes es sumar dos vectores, elemento por elemento.","Normalizar es lo que hace que una foto oscura y una clara se puedan comparar. Sin eso, el modelo aprende el brillo en vez del contenido."],logro:"Al terminar hoy puedo tomar dos listas de números y decir qué tan grandes son, qué dirección tienen y cómo compararlas — sin librerías.",conecta:"El jueves esto se convierte en la operación que mide parecido. El viernes, en una neurona.",fuentes:[["3Blue1Brown · cap. 1 Vectores","https://www.youtube.com/watch?v=fNk_zzaMoSs","video 10 min","La intuición. Verlo una vez entero, sin pausar."],["Khan Academy · Vectores","https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces","curso con ejercicios","Ejercicios infinitos con corrección automática. Para practicar la mano."],["Immersive Math · cap. 2","https://immersivemath.com/ila/ch02_vectors/ch02.html","libro interactivo","Las figuras se mueven. El mejor sitio para jugar con un vector."],["MML · 2.1 y 2.2","https://mml-book.com","libro PDF, gratis","El formalismo serio. Leerlo DESPUÉS del video, no antes."],["MIT 18.06 · Strang","https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/","clases en video","El curso clásico. Para cuando quiera la versión universitaria completa."]],n:"Lunes",t:"Vectores: qué son y cómo se suman",video:"Cap. 1 · Vectores, ¿qué son realmente?",url:"https://www.youtube.com/watch?v=fNk_zzaMoSs",vmin:10,
+ lectura:"Mathematics for Machine Learning · 2.1 y 2.2",
+ papel:["Redibujar en papel los 3 ejemplos del video, sin pausar dos veces el mismo","Sumar 5 pares de vectores a mano y dibujar el paralelogramo","Escribir con mis palabras las 3 formas de ver un vector"],
+ codigo:["sumar(v, w)","escalar(k, v)","restar(v, w)","magnitud(v)","normalizar(v)"],
+ tests:"python -m pytest -k lunes -v",
+ reto:"Reto en blanco (20 min): reescribir magnitud() y normalizar() de memoria",
+ chk:["Vi el video y lo rehice en papel","Leí MML 2.1–2.2 y anoté","Las 5 funciones pasan sus tests","Hice el reto en blanco","Medí mi suma vs NumPy con 100000 elementos"],
+ graba:{gancho:"Un vector no es una flecha: son tres cosas distintas que resultan ser la misma.",
+  curioso:"Físico, informático y matemático miran el mismo objeto y ven cosas distintas. Los tres tienen razón.",
+  usa:"Cada imagen, audio o texto que entra a un modelo se vuelve primero una lista de números. Verificar antes de nombrar empresa.",
+  llevan:"Por qué normalizar borra el tamaño y deja la dirección — y por qué eso importa al comparar.",
+  muestro:"Mi papel con los paralelogramos, después la terminal con los tests pasando."}},
 
-  var hoy = new Date().getDay();
-  var sel = hoy;
-  var fmt = new Intl.DateTimeFormat('es-PE', { weekday: 'long', day: 'numeric', month: 'long' });
-  document.getElementById('h-date').textContent = fmt.format(new Date());
+{d:2,porque:"Hoy aprendo por qué dos columnas de datos pueden ser mentira.",puntos:["Si una columna es “altura en cm” y otra “altura en metros”, no hay dos datos: hay uno disfrazado de dos. Eso es dependencia lineal.","En Python esto aparece como un modelo que entrena “bien” y predice mal, o que da resultados distintos cada vez que lo corres.","El span es cuánta información distinta hay realmente en mis datos. No cuántas columnas tengo."],logro:"Al terminar hoy puedo mirar un conjunto de vectores y decir si alguno sobra.",conecta:"En la fase 3 esto decide cuántos filtros necesita una CNN y por qué más no siempre es mejor.",fuentes:[["3Blue1Brown · cap. 2 Span y base","https://www.youtube.com/watch?v=k7RM-ot2NWY","video 10 min","Span, combinación lineal y base, con animación."],["Khan Academy · Combinaciones y span","https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces","ejercicios","La sección de span e independencia lineal."],["Immersive Math · cap. 3","https://immersivemath.com/ila/ch03_dotproduct/ch03.html","libro interactivo","Seguir moviendo los vectores hasta que el span se entienda solo."],["MML · 2.5","https://mml-book.com","libro PDF","Bases e independencia lineal, con las definiciones formales."]],n:"Martes",t:"Combinaciones lineales, span y base",video:"Cap. 2 · Combinaciones lineales, span y base",url:"https://www.youtube.com/watch?v=k7RM-ot2NWY",vmin:10,
+ lectura:"MML · 2.5 (bases e independencia lineal)",
+ papel:["Dibujar el span de dos vectores en 2D y de dos vectores paralelos","Encontrar a mano 3 combinaciones que den el mismo punto","Escribir por qué el span de dos paralelos es una línea"],
+ codigo:["combinacion_lineal(vectores, pesos)","son_paralelos(v, w)","esta_en_el_span(objetivo, v, w)"],
+ tests:"python -m pytest -k martes -v",
+ reto:"",
+ chk:["Vi el video y dibujé los spans","Leí MML 2.5","Las 3 funciones pasan sus tests","Puedo explicar span sin mirar"],
+ graba:{gancho:"Dos columnas de datos que parecen distintas pueden no aportar nada nueva.",
+  curioso:"Eso tiene nombre desde hace 200 años: dependencia lineal.",
+  usa:"Es por qué se eliminan columnas correlacionadas antes de entrenar un modelo.",
+  llevan:"El término para buscar: multicolinealidad.",
+  muestro:"El dibujo del span aplastándose en una línea."}},
 
-  function store(k, v) {
-    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {}
-  }
+{d:3,porque:"Hoy aprendo que una matriz no es una tabla: es una instrucción.",puntos:["Rotar una foto, hacer zoom, voltearla: cada una es una matriz 2×2 aplicada a cada píxel.","La augmentación de datos — crear más ejemplos rotando y estirando imágenes — es exactamente esto, y es lo que salva un dataset chico de microscopía.","En Python, una capa de una red es una matriz. Cuando escribes model.add(Dense(64)), estás creando una matriz de 64 filas."],logro:"Al terminar hoy puedo leer una matriz 2×2 y decir qué le hace al plano sin calcular nada.",conecta:"En la fase 2, estas matrices son los pesos que la red va ajustando sola.",fuentes:[["3Blue1Brown · cap. 3 Transformaciones","https://www.youtube.com/watch?v=kYB8IZa5AuE","video 11 min","El capítulo más importante de la semana."],["Immersive Math · cap. 6 Matrices","https://immersivemath.com/ila/ch06_matrices/ch06.html","libro interactivo","Mover la matriz y ver la malla deformarse en vivo."],["Khan Academy · Transformaciones lineales","https://www.khanacademy.org/math/linear-algebra/matrix-transformations","curso","Ejercicios de aplicar matrices a vectores."],["MML · 2.7","https://mml-book.com","libro PDF","Transformaciones lineales como mapas entre espacios."],["Colah · Redes neuronales y topología","https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/","blog","Qué hace una red cuando deforma el espacio. Adelanto de la fase 2."]],n:"Miércoles",t:"Transformaciones lineales y matrices",video:"Cap. 3 · Transformaciones lineales y matrices",url:"https://www.youtube.com/watch?v=kYB8IZa5AuE",vmin:11,
+ lectura:"MML · 2.7",
+ papel:["Aplicar 5 matrices 2×2 distintas a [1,0] y [0,1], a mano","Dibujar la malla antes y después de cada una","Predecir el resultado ANTES de calcular, y anotar si acerté"],
+ codigo:["aplicar(matriz, v)","transpuesta(matriz)","identidad(n)","determinante_2x2(matriz)"],
+ tests:"python -m pytest -k miercoles -v",
+ reto:"Reto en blanco (20 min): reescribir aplicar() de memoria",
+ chk:["Vi el video","Hice las 5 matrices en papel y predije antes","Leí MML 2.7","Las 4 funciones pasan sus tests","Hice el reto en blanco"],
+ graba:{gancho:"Cuatro números contienen a dónde va el plano entero.",
+  curioso:"Las columnas de una matriz son literalmente dónde aterrizan los ejes. Nada más.",
+  usa:"Rotar una foto, hacer zoom, o la augmentación de datos para entrenar: todo es esto.",
+  llevan:"Cómo leer una matriz de un vistazo sin calcular nada.",
+  muestro:"Mi papel con la malla deformada, al lado del mismo caso en código."}},
 
-  function render(d) {
-    var x = dias[d];
-    document.getElementById('t-title').textContent = x.t;
-    document.getElementById('t-when').textContent = (d === hoy ? "hoy · " : "") + x.when;
-    document.getElementById('h-topic').textContent = x.topic;
-    document.getElementById('h-block').textContent = d === 0 ? "domingo libre" : "08:00–12:00 teoría · 14:00–17:00 práctica · 19:00–20:00 contenido";
+{d:4,porque:"Hoy aprendo la operación que está debajo de casi toda la IA moderna.",puntos:["El producto punto mide parecido entre dos listas. Buscar “fotos parecidas a esta” es calcular productos punto y quedarse con los más altos.","La atención de un transformer —lo que hace funcionar a los modelos de lenguaje— es, en su centro, productos punto entre vectores.","En Python se escribe a @ b. Hoy escribo el bucle que hay detrás de ese símbolo, para saber qué cuesta."],logro:"Al terminar hoy puedo calcular parecido entre dos cosas cualesquiera, y sé por qué mi versión es más lenta que NumPy.",conecta:"Mañana esto es literalmente la primera línea de la neurona.",fuentes:[["3Blue1Brown · cap. 4 Composición","https://www.youtube.com/watch?v=XkY2DOUCWMU","video 10 min","Por qué AB no es BA."],["3Blue1Brown · cap. 9 Producto punto","https://www.youtube.com/watch?v=LyGKycYT2v0","video 14 min","La dualidad. Es el capítulo que más veces voy a volver a ver."],["Immersive Math · cap. 3 Producto punto","https://immersivemath.com/ila/ch03_dotproduct/ch03.html","libro interactivo","Ver la proyección moviéndose."],["Khan Academy · Producto punto","https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces","ejercicios","Hasta que salga sin pensar."],["MML · 3.1 y 3.2","https://mml-book.com","libro PDF","Producto interno, normas y ángulos."],["Sebastian Raschka · Ahead of AI","https://magazine.sebastianraschka.com/","substack","Cómo se usa todo esto en modelos reales. Para el bloque de contenido."]],n:"Jueves",t:"Composición y producto punto — la pieza clave",video:"Cap. 4 · Composición · y Cap. 9 · Producto punto",url:"https://www.youtube.com/watch?v=XkY2DOUCWMU",url2:"https://www.youtube.com/watch?v=LyGKycYT2v0",vmin:25,
+ lectura:"MML · 3.1 y 3.2 (producto interno)",
+ papel:["Multiplicar 3 pares de matrices 2×2 a mano, sin calculadora","Comprobar con un ejemplo que AB ≠ BA y explicar por qué","Calcular 5 productos punto y dibujar la proyección de cada uno"],
+ codigo:["producto_punto(v, w)  ← la pieza del viernes","angulo_entre(v, w)","matmul(a, b) con 3 bucles","matmul_np(a, b)"],
+ tests:"python -m pytest -k jueves -v",
+ reto:"",
+ chk:["Vi los DOS videos","Multipliqué 3 pares de matrices en papel","Leí MML 3.1–3.2","Las 4 funciones pasan sus tests","Comparé matmul vs matmul_np y anoté el factor"],
+ graba:{gancho:"La operación que decide qué video te recomiendan es una multiplicación y una suma.",
+  curioso:"El producto punto mide parecido. Dos listas, multiplicar y sumar: eso es todo.",
+  usa:"Búsqueda por embeddings y bases vectoriales funcionan con esto. Verificar producto concreto antes de nombrarlo.",
+  llevan:"Por qué la similitud coseno se usa más que la distancia euclidiana.",
+  muestro:"Mis 5 proyecciones en papel, y el factor de velocidad entre mi matmul y NumPy."}},
 
-    var res = document.getElementById('t-res');
-    res.innerHTML = '';
-    if (x.link) {
-      var a = document.createElement('a');
-      a.href = x.link; a.textContent = x.t;
-      res.appendChild(a);
-    }
-    var s = document.createElement('span');
-    s.className = 'src'; s.textContent = x.src;
-    res.appendChild(s);
-    document.getElementById('t-read').textContent = x.read;
-    document.getElementById('t-prac').textContent = x.prac;
+{d:5,porque:"Hoy construyo la pieza que se repite miles de millones de veces en un modelo grande.",puntos:["Una neurona toma entradas, las pesa, suma y decide. Un modelo de lenguaje es esa misma operación, repetida a escala absurda.","El sesgo b es el umbral: cuánto le cuesta activarse. Los pesos w son qué le importa. Eso es todo lo que una red “aprende”.","Sin la función de activación, apilar 100 capas da exactamente lo mismo que una sola. Hoy lo compruebo con mi propio código."],logro:"Al terminar hoy tengo una neurona funcionando que escribí yo, línea por línea, y puedo explicar cada símbolo.",conecta:"En la semana 9 le agrego el aprendizaje: que ajuste sus propios pesos.",fuentes:[["MML · 5.1","https://mml-book.com","libro PDF","Antes de programar la neurona: qué significa componer funciones."],["Karpathy · micrograd","https://www.youtube.com/watch?v=VMj-3S1tku0","video, adelanto","Solo los primeros 20 min, para ver a dónde lleva lo de hoy."],["Nielsen · Neural Networks and Deep Learning, cap. 1","http://neuralnetworksanddeeplearning.com/chap1.html","libro gratis","La neurona explicada desde cero, con perceptrones y sigmoides."],["Distill · publicaciones","https://distill.pub/","revista visual","Artículos con visualizaciones. Leer uno el fin de semana."]],n:"Viernes",t:"Mini proyecto: una neurona a mano",video:"",url:"",vmin:0,
+ lectura:"Sin video nuevo. Releer mis apuntes del jueves.",
+ papel:["Escribir y = f(w·x + b) y señalar qué es cada símbolo","Calcular a mano la salida de un AND y un OR con escalón","Dibujar la recta que separa: eso es lo que la neurona aprende"],
+ codigo:["escalon(z)","sigmoide(z)  ← cuidado con el overflow","relu(z)","neurona(x, w, b, activacion)","capa(x, pesos, sesgos)","neurona_np(x, w, b)"],
+ tests:"python -m pytest -k viernes -v",
+ reto:"",
+ chk:["Hice el AND y el OR en papel antes de programar","Las 6 funciones pasan sus tests","La versión NumPy da lo mismo que la mía","Anoté qué me oculta NumPy","Defendí el tema con /defender"],
+ graba:{gancho:"Una neurona es de 1958 y cabe en una línea.",
+  curioso:"Multiplicar, sumar, pasar un umbral. Eso se repite miles de millones de veces en un modelo grande.",
+  usa:"Es la unidad de cualquier red neuronal que uses hoy.",
+  llevan:"Por qué sin función de activación, 100 capas valen lo mismo que una.",
+  muestro:"El AND en papel, después mi neurona corriendo en la terminal."}},
 
-    var box = document.getElementById('t-checks');
-    box.innerHTML = '';
-    x.checks.forEach(function (txt, i) {
-      var key = 'ia-s1-d' + d + '-' + i;
-      var lab = document.createElement('label');
-      var inp = document.createElement('input');
-      inp.type = 'checkbox'; inp.id = key;
-      inp.checked = store(key) === '1';
-      inp.addEventListener('change', function () { store(key, inp.checked ? '1' : '0'); });
-      var sp = document.createElement('span');
-      sp.textContent = txt;
-      lab.appendChild(inp); lab.appendChild(sp);
-      box.appendChild(lab);
-    });
+{d:6,porque:"Hoy veo el camino completo y lo publico.",puntos:["Flecha → lista de números → combinación → matriz → producto punto → neurona. Seis días, una sola idea que crece.","Este es el mismo camino que recorre cualquiera que trabaja en IA. Nadie empieza por el transformer.","Publicarlo con README y tests es lo que convierte estudio en portafolio."],logro:"Al terminar hoy tengo mi primera librería de álgebra lineal, escrita por mí, con 51 tests en verde.",conecta:"La semana 2 pregunta cuándo una matriz se puede deshacer — y eso explica por qué un modelo puede fallar.",fuentes:[["Mis apuntes de la semana","https://mml-book.com","repaso","Primero lo mío, después material nuevo."],["3Blue1Brown · la playlist completa","https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab","16 videos","Revisar los capítulos de la semana a 1.5x, de corrido."],["Lilian Weng · blog","https://lilianweng.github.io/","blog técnico","Para elegir qué leer cuando llegue a la fase 2 y 3."],["Hugging Face · Daily Papers","https://huggingface.co/papers","papers","Mirar 5 minutos. No entender todo todavía es normal."],["Import AI · Jack Clark","https://jack-clark.net/","newsletter","Panorama semanal de la industria. 15 min, los sábados."]],n:"Sábado",t:"Repaso, publicar y grabar la semana",video:"",url:"",vmin:0,
+ lectura:"Mi propio diario de la semana + los temas marcados débiles",
+ papel:["Responder las 5 preguntas de cierre sin mirar nada","Rehacer el ejercicio que más me costó","Anotar qué quedó débil de verdad"],
+ codigo:["Limpiar el código de la semana","README del mini proyecto","Subir a GitHub"],
+ tests:"python -m pytest -v  (toda la semana)",
+ reto:"Reto en blanco (20 min): producto_punto y neurona, de memoria",
+ chk:["Respondí las 5 preguntas sin mirar","Los 51 tests pasan","Proyecto en GitHub con README","Reto en blanco hecho","Video de la semana grabado"],
+ graba:{gancho:"Seis días atrás no sabía qué era un vector. Hoy mi código piensa.",
+  curioso:"El recorrido completo: flecha → lista → combinación → matriz → producto punto → neurona.",
+  usa:"Es el mismo camino que recorre cualquier persona que trabaja en IA. Nadie empieza por el transformer.",
+  llevan:"La ruta exacta, en orden, para que otro la siga.",
+  muestro:"Las 6 hojas de papel en fila, y los 51 tests en verde."}}
+];
+var PREG=["¿Por qué el producto punto de dos perpendiculares es cero?","¿Qué significa determinante negativo?","Si una 2×2 manda el plano a una línea, ¿qué pasó con su rango?","En y = f(w·x+b), ¿qué controla w y qué b?","¿Por qué una red sin activación, con muchas capas, es igual a una sola capa?"];
 
-    Array.prototype.forEach.call(document.querySelectorAll('.daybar .dbtn'), function (b) {
-      b.setAttribute('aria-pressed', String(Number(b.dataset.d) === d));
-    });
-  }
-
-  Array.prototype.forEach.call(document.querySelectorAll('.daybar .dbtn'), function (b) {
-    b.addEventListener('click', function () { sel = Number(b.dataset.d); render(sel); });
+(function(){
+  var i=0, hoja=document.getElementById('hoja');
+  var tapaZona=document.getElementById('tapaZona'), cuaderno=document.getElementById('cuaderno'), barra=document.querySelector('.barra');
+  barra.hidden=true;
+  document.getElementById('tapa').addEventListener('click',function(){
+    tapaZona.hidden=true; cuaderno.hidden=false; barra.hidden=false;
   });
-  render(sel);
-})();
 
-/* ---------- laboratorio de matrices ---------- */
-(function () {
-  var cv = document.getElementById('grid');
-  if (!cv) return;
-  var ctx = cv.getContext('2d');
-  var W = cv.width, H = cv.height, unit = 62, ox = W / 2, oy = H / 2;
-  var ids = ['a', 'b', 'c', 'd'];
-
-  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
-  function A() {
-    return ids.map(function (i) {
-      var v = parseFloat(document.getElementById(i).value);
-      return isFinite(v) ? Math.max(-4, Math.min(4, v)) : 0;
-    });
-  }
-  function px(m, x, y) { return [ox + (m[0] * x + m[1] * y) * unit, oy - (m[2] * x + m[3] * y) * unit]; }
-  function f(n) { return (Math.abs(n) < 0.005 ? 0 : n).toFixed(2); }
-
-  function arrow(m, x, y, color, label) {
-    var p = px(m, x, y);
-    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(p[0], p[1]); ctx.stroke();
-    var ang = Math.atan2(p[1] - oy, p[0] - ox), s = 13;
-    ctx.beginPath(); ctx.moveTo(p[0], p[1]);
-    ctx.lineTo(p[0] - s * Math.cos(ang - .4), p[1] - s * Math.sin(ang - .4));
-    ctx.lineTo(p[0] - s * Math.cos(ang + .4), p[1] - s * Math.sin(ang + .4));
-    ctx.closePath(); ctx.fill();
-    ctx.font = '700 20px "JetBrains Mono", monospace';
-    ctx.fillText(label, p[0] + 12 * Math.cos(ang) + 6, p[1] + 12 * Math.sin(ang) - 6);
-  }
-
-  function draw() {
-    var m = A(), n = 6;
-    var ink = css('--ink'), soft = css('--ink-soft'), accent = css('--accent'), accent2 = css('--accent-2');
-    ctx.clearRect(0, 0, W, H);
-
-    ctx.lineWidth = 1; ctx.strokeStyle = soft; ctx.globalAlpha = .34;
-    for (var i = -n; i <= n; i++) {
-      var a1 = px(m, i, -n), b1 = px(m, i, n);
-      ctx.beginPath(); ctx.moveTo(a1[0], a1[1]); ctx.lineTo(b1[0], b1[1]); ctx.stroke();
-      var c1 = px(m, -n, i), d1 = px(m, n, i);
-      ctx.beginPath(); ctx.moveTo(c1[0], c1[1]); ctx.lineTo(d1[0], d1[1]); ctx.stroke();
-    }
-    ctx.globalAlpha = 1;
-
-    ctx.strokeStyle = ink; ctx.globalAlpha = .22;
-    ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(W, oy); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, H); ctx.stroke();
-    ctx.globalAlpha = 1;
-
-    var p00 = px(m, 0, 0), p10 = px(m, 1, 0), p11 = px(m, 1, 1), p01 = px(m, 0, 1);
-    ctx.beginPath(); ctx.moveTo(p00[0], p00[1]); ctx.lineTo(p10[0], p10[1]);
-    ctx.lineTo(p11[0], p11[1]); ctx.lineTo(p01[0], p01[1]); ctx.closePath();
-    var det = m[0] * m[3] - m[1] * m[2];
-    ctx.fillStyle = det < 0 ? accent2 : accent;
-    ctx.globalAlpha = .15; ctx.fill(); ctx.globalAlpha = 1;
-
-    arrow(m, 1, 0, accent, 'î');
-    arrow(m, 0, 1, accent2, 'ĵ');
-
-    document.getElementById('o-i').textContent = '(' + f(m[0]) + ', ' + f(m[2]) + ')';
-    document.getElementById('o-j').textContent = '(' + f(m[1]) + ', ' + f(m[3]) + ')';
-    document.getElementById('o-det').textContent = f(det);
-  }
-
-  ids.forEach(function (i) { document.getElementById(i).addEventListener('input', draw); });
-  Array.prototype.forEach.call(document.querySelectorAll('.presets .dbtn'), function (b) {
-    b.addEventListener('click', function () {
-      var v = b.dataset.m.split(',');
-      ids.forEach(function (id, k) { document.getElementById(id).value = v[k]; });
-      draw();
-    });
+  var pags=document.getElementById('pags');
+  DIAS.forEach(function(x,k){
+    var b=document.createElement('button'); b.className='pag'; b.type='button';
+    b.textContent=x.n.slice(0,3).toLowerCase(); b.addEventListener('click',function(){ir(k)}); pags.appendChild(b);
   });
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
-  draw();
+  function g(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}}
+  function el(t,c,x){var e=document.createElement(t); if(c)e.className=c; if(x!==undefined)e.textContent=x; return e}
+
+  function bloque(hora,nota,cuerpo){
+    var b=el('div','bloque'), h=el('div','hora');
+    h.innerHTML=hora+'<b>'+nota+'</b>'; b.appendChild(h); b.appendChild(cuerpo); return b;
+  }
+
+  function pintar(){
+    var x=DIAS[i];
+    document.getElementById('h-dia').textContent=x.n;
+    document.getElementById('h-tema').textContent=x.t;
+    document.getElementById('h-folio').textContent='día '+x.d+' de 6';
+
+    var tot=document.getElementById('h-totales'); tot.innerHTML='';
+    [[x.vmin?x.vmin+' min':'sin video','video'],[x.codigo.length+'','funciones'],['7 h','en total'],[x.reto?'sí':'no','reto en blanco']]
+      .forEach(function(p){var s=el('span','pastilla'); s.innerHTML='<b>'+p[0]+'</b> '+p[1]; tot.appendChild(s)});
+
+    var box=document.getElementById('h-bloques'); box.innerHTML='';
+
+    var m=el('div','tarea');
+    if(x.url){var a=el('a','recurso',x.video); a.href=x.url; m.appendChild(a);
+      if(x.url2){var a2=el('a','recurso',"→ y después el capítulo 9"); a2.href=x.url2; a2.style.marginTop='.3rem'; m.appendChild(a2)}}
+    else m.appendChild(el('p','q',x.video||'Sin video nuevo'));
+    m.appendChild(el('p','sm soft','Libro base: '+x.lectura));
+    box.appendChild(m);
+
+    var w=el('div','caja porque');
+    w.appendChild(el('p','tit',x.porque));
+    var ulw=el('ul','lista'); x.puntos.forEach(function(t){ulw.appendChild(el('li','',t))}); w.appendChild(ulw);
+    var lg=el('p','logro'); lg.textContent='✓ '+x.logro; w.appendChild(lg);
+    w.appendChild(el('p','sm soft','→ '+x.conecta));
+    box.appendChild(w);
+
+    var f=el('div','caja'); f.appendChild(el('p','tit','De dónde aprendo esto'));
+    (x.fuentes||[]).forEach(function(r){
+      var li=el('div','fuente');
+      li.innerHTML='<a href="'+r[1]+'">'+r[0]+'</a><span class="tipo">'+r[2]+'</span><p class="sm soft">'+r[3]+'</p>';
+      f.appendChild(li);
+    });
+    f.appendChild(el('p','sm soft','Si con una fuente no entiendo, abro otra. El concepto es el mismo contado distinto.'));
+    box.appendChild(f);
+
+    var pa=el('div','caja'); pa.appendChild(el('p','tit','Después del video, en papel'));
+    var ul=el('ul','lista'); x.papel.forEach(function(t){ul.appendChild(el('li','',t))}); pa.appendChild(ul);
+    box.appendChild(pa);
+
+    var p=el('div','caja'); p.appendChild(el('p','tit','Programar, sin autocompletado'));
+    var ul2=el('ul','lista'); x.codigo.forEach(function(t){var li=el('li'); li.innerHTML='<span class="mono">'+t+'</span>'; ul2.appendChild(li)}); p.appendChild(ul2);
+    var pre=el('p','sm soft'); pre.innerHTML='Comprobar: <code>'+x.tests+'</code>'; p.appendChild(pre);
+    if(x.reto) p.appendChild(el('p','sm soft','⏱ '+x.reto));
+    box.appendChild(p);
+
+    var ex=document.getElementById('h-extra'); ex.innerHTML='';
+
+    var ck=el('div','caja'); ck.appendChild(el('p','tit','Lo marco cuando lo hice'));
+    x.chk.forEach(function(t,k){
+      var key='s1-d'+x.d+'-'+k, lab=el('label','chk'), inp=document.createElement('input');
+      inp.type='checkbox'; inp.id=key; inp.checked=g(key)==='1';
+      inp.addEventListener('change',function(){g(key,inp.checked?'1':'0')});
+      lab.appendChild(inp); lab.appendChild(el('span','',t)); ck.appendChild(lab);
+    });
+    ex.appendChild(ck);
+
+    var gr=x.graba, cj=el('div','caja graba');
+    cj.appendChild(el('p','tit','Qué grabo hoy · 1 minuto'));
+    var gu=el('div','guion');
+    [['0–3 s','Gancho: “'+gr.gancho+'”'],['3–20 s',gr.curioso],['20–40 s','Dónde se usa: '+gr.usa],['40–55 s','Lo que se llevan: '+gr.llevan],['55–60 s','Cierre: qué viene mañana']]
+      .forEach(function(r){gu.appendChild(el('span','s',r[0])); gu.appendChild(el('span','',r[1]))});
+    cj.appendChild(gu);
+    cj.appendChild(el('p','sm soft','En pantalla: '+gr.muestro));
+    cj.appendChild(el('p','sm soft','Después de grabar: /cierre para el diario y el progreso.'));
+    ex.appendChild(cj);
+
+    if(i===5){
+      var q=el('div','caja'); q.appendChild(el('p','tit v','Las 5 preguntas que cierran la semana'));
+      var ol=el('ol','lista'); PREG.forEach(function(t){ol.appendChild(el('li','',t))}); q.appendChild(ol);
+      q.appendChild(el('p','sm soft','Si no salen sin mirar, la semana no está terminada aunque los tests pasen.'));
+      ex.appendChild(q);
+    }
+
+    var ap=el('div','caja'); ap.appendChild(el('p','tit','Mis apuntes del día'));
+    var ta=document.createElement('textarea'); ta.className='apuntes'; ta.placeholder='Hoy entendí que…';
+    var kap='s1-ap-'+x.d; ta.value=g(kap)||'';
+    var st=el('p','sm soft',ta.value?'Guardado en este navegador.':'');
+    var t0; ta.addEventListener('input',function(){clearTimeout(t0);st.textContent='escribiendo…';
+      t0=setTimeout(function(){g(kap,ta.value);st.textContent='Guardado — '+ta.value.length+' caracteres.'},500)});
+    ap.appendChild(ta); ap.appendChild(st); ex.appendChild(ap);
+
+    hoja.style.animation='none'; void hoja.offsetWidth; hoja.style.animation='';
+    document.getElementById('prev').disabled=i===0;
+    document.getElementById('next').disabled=i===DIAS.length-1;
+    Array.prototype.forEach.call(pags.children,function(b,k){b.setAttribute('aria-current',String(k===i))});
+  }
+  function ir(k){if(k<0||k>=DIAS.length)return; i=k; pintar(); window.scrollTo({top:0,behavior:'smooth'})}
+  document.getElementById('next').addEventListener('click',function(){ir(i+1)});
+  document.getElementById('prev').addEventListener('click',function(){ir(i-1)});
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT')return;
+    if(e.key==='ArrowRight')ir(i+1); if(e.key==='ArrowLeft')ir(i-1);
+  });
+  var modal=document.getElementById('modal');
+  document.getElementById('verHorario').addEventListener('click',function(){modal.hidden=false});
+  document.getElementById('cerrar').addEventListener('click',function(){modal.hidden=true});
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.hidden=true});
+
+  var hoy=new Date().getDay();
+  i=(hoy>=1&&hoy<=6)?hoy-1:0;
+  pintar();
 })();
 </script>
