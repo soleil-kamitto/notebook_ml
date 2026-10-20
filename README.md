@@ -1,29 +1,3 @@
-# Mi cuaderno de IA
-
-Estoy aprendiendo inteligencia artificial desde cero, empezando por las matemáticas. Son 24 semanas, 6 días por semana, 7 horas al día. Todo lo programo a mano antes de usar cualquier librería.
-
-Soy Soleil, estudiante de Computer Science en Lima. Investigo visión por computadora aplicada a microbiología.
-
-Publico un video cada día de la serie "Día X aprendiendo IA desde cero".
-
-Empecé el 19 de octubre de 2026.
-
----
-
-## Por qué lo hago así
-
-Quiero poder escribir el código yo sola, entender cada línea y saber qué cuesta. No quiero saber usar librerías, quiero saber qué hacen por dentro.
-
-Por eso programo sin autocompletado de IA y cada día anoto si fue un día limpio.
-
-Escribo todo primero en Python puro y después en NumPy, y comparo las dos versiones para ver qué me estaba ahorrando.
-
-Que los tests pasen no significa que aprendí. Tengo que poder explicar cada línea, cuánto cuesta y cómo se optimiza.
-
-Tres veces por semana reescribo de memoria una función que ya resolví, en 20 minutos, sin mirar nada.
-
----
-
 ## El cuaderno
 
 Abro `web/index.html` en el navegador. Es un cuaderno de verdad, tiene tapa, se abre y trae una hoja por cada día de la semana.
